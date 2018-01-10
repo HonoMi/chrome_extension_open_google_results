@@ -1,13 +1,12 @@
 {
-  "name": "Copy Urls",
+  "name": "Open Google Results.",
   "short_name": "__MSG_appShortName__",
-  "description": "見ているページのURLをクリップボードに送る。",
+  "description": "Google検索でヒットしたページを一気に開く。",
   "version": "0.0.0",
   "manifest_version": 2,
   "default_locale": "en",
   "icons": {
-    "16": "images/icon_SDcard.png",
-    "128": "images/icon_SDcard.png"
+    "128": "images/icon_questionnaire.png"
   },
   "background": {
     "scripts": [
@@ -15,8 +14,8 @@
     ]
   },
   "browser_action": {
-      "default_icon": "images/icon_SDcard.png",
-      "default_title": "Copy urls.",
+      "default_icon": "images/icon_questionnaire.png",
+      "default_title": "Open Google Results.",
       "default_popup": "pages/popup.html"
   },
   "options_page": "pages/options.html",
@@ -64,6 +63,8 @@
     "webNavigation",
     "webRequest",
     "webRequestBlocking",
+    "storage",
+    "background", 
     "<all_urls>"
   ],
   "web_accessible_resources": [

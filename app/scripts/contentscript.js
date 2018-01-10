@@ -5,27 +5,25 @@ const jquery = require('jquery');
 window.$ = window.jQuery = jquery;
 const util = require('./util');
 
+chrome.storage.sync.get(util.OPTION_KEYS, function(items){
+        keyboardListener(items);
+    }
+);
 
-function getHeadingText(){
-    return $("title").text().replace(/\n/g, "").replace(/^ +/, "").replace(/ +$/g, "")
-}
 
-$(document).keydown(function(event){
-    if(event.ctrlKey){
-        if(event.shiftKey){
-            if(event.key === "Y"){
-                chrome.runtime.sendMessage({method: "copyUrlOfAllTab"}, function(response) {});
-            }
-        }else{
-            if(event.key === "y"){
-                util.copyTextToClipboard("- [" + getHeadingText() + "](" + decodeURIComponent(location.href) + ")");
-            }else if(event.key === "c"){
-                util.copyTextToClipboard(getHeadingText());
-            }else if(event.key === "q"){
-                util.copyTextToClipboard(decodeURIComponent(location.href));
+function keyboardListener(options){
+    $(document).keydown(function(event){
+        const keyboard = options[util.RESET_KEYBOARD_KEY];
+        if(event.key == keyboard){
+            localStorage[util.keyUrlSpecific(location.href)] = 0;
+        }
+        if(event.ctrlKey){
+            if(event.keyCode === 32/* space */){
+                chrome.runtime.sendMessage({method: "openLinks"}, function(response) {});
             }
         }
-    }
-})
+    })
+}
+
 
 }

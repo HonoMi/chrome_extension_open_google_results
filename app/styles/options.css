@@ -1,0 +1,20 @@
+
+input:focus { background: skyblue; }
+.option_box {
+    margin: 10px;
+    padding: 5px;
+    background: plum;
+    border: 1px solid #ddd;
+}
+
+#save {
+    position: fixed;    /* absolute かつ、window内での位置が固定*/
+    bottom: 10px;     /* 下から0px という意味。*/
+    right: 100px;
+    width: 200px;
+    height: 100px;
+    font-size: 50px;
+    color: red;
+    z-index:200;
+}
+
