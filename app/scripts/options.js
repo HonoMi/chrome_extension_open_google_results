@@ -5,87 +5,63 @@
 const jquery = require('jquery');
 window.$ = window.jQuery = jquery;
 const util = require('./util');
+const _ = require('lodash');
+const R = require('ramda');
 
-window.onload = function() {
+function createObject(key, value){
+    const obj = {};
+    obj[key] = value;
+    return obj;
+}
+
+$(document).ready(()=>{
     // Get values from html, set it onto chrome.storage.
-    let save = document.getElementById("save");
-
-    save.onclick = function() {
-        // modal
-        let modal = document.getElementById("modal");
-        modal.className = "";
-        let mask = document.getElementById("mask");
-        mask.className = "";
+    // let save = document.getElementById("save");
+    $('#save').on('click', function(){
+        // Modal.
+        $('#modal').attr('class', '')
+        $('#mask').attr('class', '')
         setTimeout(
-            function() {modal.className="hidden";mask.className="hidden"}, 
+            function() {$('#modal').attr('class', 'hidden');$('#mask').attr('class', 'hidden')}, 
             800
         );
 
         // Set openType.
-        let openTypeTags = document.getElementsByName("open_type");
-        for(let i=0; i<openTypeTags.length; i++){
-            let openTypeTag = openTypeTags[i];
-            if(openTypeTag.checked){
-                let updateItem = {};
-                updateItem[util.OPEN_TYPE_KEY] = openTypeTag.getAttribute("value");
-                chrome.storage.sync.set(updateItem);
-                break;
-            }
-        }
+        _($('[name=open_type]'))
+            .filter(tag=>tag.checked)
+            .forEach(function(tag){
+                 const updateItem = {};
+                 chrome.storage.sync.set(createObject(util.OPEN_TYPE_KEY, tag.getAttribute('value')));
+            })
+
         // Set numLinksAtOnce.
-        let numLinksAtOnce = parseInt(document.getElementById("num_links_at_once").value);
-        let updateItem = {};
-        updateItem[util.NUM_LINKS_AT_ONCE_KEY] = numLinksAtOnce;
-        chrome.storage.sync.set(updateItem);
+        const numLinksAtOnce = parseInt(document.getElementById("num_links_at_once").value);
+        chrome.storage.sync.set(createObject(util.NUM_LINKS_AT_ONCE_KEY, numLinksAtOnce));
         // Set openIntervalTimeScale.
-        let openIntervalTimeScale = parseInt(document.getElementById("open_interval_time_scale").value);
-        updateItem = {}
-        updateItem[util.OPEN_INTERVAL_TIME_SCALE_KEY] = openIntervalTimeScale;
-        chrome.storage.sync.set(updateItem);
+        const openIntervalTimeScale = parseInt(document.getElementById("open_interval_time_scale").value);
+        chrome.storage.sync.set(createObject(util.OPEN_INTERVAL_TIME_SCALE_KEY, openIntervalTimeScale));
         // Set spell.
-        let spell = document.getElementById("spell").value;
-        updateItem = {}
-        updateItem[util.SPELL_KEY] = spell;
-        chrome.storage.sync.set(updateItem);
+        const spell = document.getElementById("spell").value;
+        chrome.storage.sync.set(createObject(util.SPELL_KEY, spell));
         // Set resetKeyboard.
-        let resetKeyboard = document.getElementById("reset_keyboard").value;
-        updateItem = {}
-        updateItem[util.RESET_KEYBOARD_KEY] = resetKeyboard;
-        chrome.storage.sync.set(updateItem);
+        const resetKeyboard = document.getElementById("reset_keyboard").value;
+        chrome.storage.sync.set(createObject(util.RESET_KEYBOARD_KEY, resetKeyboard));
         // Set shakeWindow.
-        let shakeWindow = document.getElementById("shake_window").checked;
-        updateItem = {}
-        updateItem[util.SHAKE_WINDOW_KEY] = shakeWindow;
-        chrome.storage.sync.set(updateItem);
-    };
+        const shakeWindow = document.getElementById("shake_window").checked;
+        chrome.storage.sync.set(createObject(util.SHAKE_WINDOW_KEY, shakeWindow));
+    })
 
     // Get options from chrome.storage, set them onto html default values.
     chrome.storage.sync.get(util.OPTION_KEYS, function(items){
-            let openType = items[util.OPEN_TYPE_KEY];
-            let tag = document.querySelectorAll(".open_type[value=" + openType + "]")[0];
-            tag.checked = true;
-
-            let id = "num_links_at_once";
-            tag = document.getElementById(id);
-            tag.value = items[util.NUM_LINKS_AT_ONCE_KEY];
-
-            id = "open_interval_time_scale";
-            tag = document.getElementById(id);
-            tag.value = items[util.OPEN_INTERVAL_TIME_SCALE_KEY];
-
-            id = "spell";
-            tag = document.getElementById(id);
-            tag.value = items[util.SPELL_KEY];
-
-            id = "reset_keyboard";
-            tag = document.getElementById(id);
-            tag.value = items[util.RESET_KEYBOARD_KEY];
-
-            id = "shake_window";
-            tag = document.getElementById(id);
-            document.getElementById("shake_window").checked = items[util.SHAKE_WINDOW_KEY];
+            const openType = items[util.OPEN_TYPE_KEY];
+            $('.open_type[value=' + openType + ']').prop('checked', true);
+            $('#num_links_at_once').val(items[util.NUM_LINKS_AT_ONCE_KEY]);
+            $('#open_interval_time_scale').val(items[util.OPEN_INTERVAL_TIME_SCALE_KEY]);
+            $('#spell').val(items[util.SPELL_KEY]);
+            $('#reset_keyboard').val(items[util.RESET_KEYBOARD_KEY]);
+            $('#shake_window').prop('checked', items[util.SHAKE_WINDOW_KEY]);
         }
     );
-};
+})
 
 }

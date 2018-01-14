@@ -5,17 +5,12 @@ const jquery = require('jquery');
 window.$ = window.jQuery = jquery;
 const util = require('./util');
 
-chrome.storage.sync.get(util.OPTION_KEYS, function(items){
-        keyboardListener(items);
-    }
-);
 
-
-function keyboardListener(options){
+function addKeyboardListener(options){
     $(document).keydown(function(event){
         const keyboard = options[util.RESET_KEYBOARD_KEY];
         if(event.key == keyboard){
-            localStorage[util.keyUrlSpecific(location.href)] = 0;
+            localStorage[util.keyUrlSpecific(location.href)] = 0;   // Start link index.
         }
         if(event.ctrlKey){
             if(event.keyCode === 32/* space */){
@@ -24,6 +19,11 @@ function keyboardListener(options){
         }
     })
 }
+
+chrome.storage.sync.get(util.OPTION_KEYS, function(options){
+        addKeyboardListener(options);
+    }
+);
 
 
 }
