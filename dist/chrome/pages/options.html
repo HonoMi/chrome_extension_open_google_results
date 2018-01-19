@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <!--<script type="text/javascript" src="include.js"></script>-->
+    <script src="../scripts/options.js"></script>
+    <meta charset="utf-8">
+    <title>Optoins</title>
+    <link rel="stylesheet" href="../styles/option_modal_window.css">
+    <link rel="stylesheet" href="../styles/options.css">
+    <link rel="stylesheet" href="../styles/definition_list.css">
+</head>
+
+<body>
+    <div id="modal" class="hidden"style=" text-align: center;"> Saved! </div>
+    <div id="mask" class="hidden"></div>
+
+    <h1>Options</h1>
+
+    <div class="option_box">
+        <h2 class="option_title">openType.</h2>
+        <p class="option_description">
+            How to open links one by one. The types are:
+            <dl>
+                <dt>stop_and_go</dt>
+                <dd>Open single tab first, wait for a minute, open the others simultaneously.</dd>
+                <dt>cascade</dt>
+                <dd>Open tabs one by one. The time interval is exponentially decayed.</dd>
+                <dt>interval</dt>
+                <dd>Open tabs one by one. The time interval is constant</dd>
+            </dl>
+        </p>
+        <div class="option_content">
+            <input type="radio" class="open_type" name="open_type" value="stop_and_go"> stop_and_go
+            <input type="radio" class="open_type" name="open_type" value="cascade"> cascade
+            <input type="radio" class="open_type" name="open_type" value="interval"> interval
+        </div>
+    </div>
+
+    <div class="option_box">
+        <h2 class="option_title">numLinksAtOnce</h2>
+        <p class="option_description">The number of links to open at once.</p>
+        <div class="option_content">
+            <input type="number" id="num_links_at_once" name="num_links_at_once"> [tabs]
+        </div>
+    </div>
+
+    <div class="option_box">
+        <h2 class="option_title">openIntervalTimeScale</h2>
+        <p class="option_description">The interval time between tab-opens.</p>
+        <div class="option_content">
+            <input type="number" id="open_interval_time_scale" name="open_interval_time_scale"> [ms] </input>
+        </div>
+    </div>
+
+    <div class="option_box">
+        <h2 class="option_title">spell</h2>
+        <p class="option_description">The spell to shout when we run the command.</p>
+        <div class="option_content">
+            <input type="text" id="spell" name="spell">
+        </div>
+    </div>
+
+    <div class="option_box">
+        <h2 class="option_title">resetKeyboard</h2>
+        <p class="option_description">The keyboard shortcut to reset the number of already opened links.</p>
+        <div class="option_content">
+            <input type="text" id="reset_keyboard" name="reset_keyboard">
+        </div>
+    </div>
+
+    <div class="option_box">
+        <h2 class="option_title">shakeWindow</h2>
+        <p class="option_description">Whether or not shake window when the command is executed.</p>
+        <div class="option_content">
+            <input type="checkbox" id="shake_window" value="shake_window">on</input>
+        </div>
+    </div>
+
+
+    <div class="save_button">
+        <button id="save">Save!</button>
+    </div>
+
+
+</body>
+
+</html>

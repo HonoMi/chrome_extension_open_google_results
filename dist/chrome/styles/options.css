@@ -1,0 +1,22 @@
+
+input:focus { background: skyblue; }
+.option_box {
+    margin: 10px;
+    padding: 5px;
+    background: plum;
+    border: 1px solid #ddd;
+}
+
+#save {
+    position: fixed;    /* absolute かつ、window内での位置が固定*/
+    bottom: 10px;     /* 下から0px という意味。*/
+    right: 100px;
+    width: 200px;
+    height: 100px;
+    font-size: 50px;
+    color: red;
+    z-index:200;
+}
+
+
+/*# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiIiwic291cmNlcyI6WyJvcHRpb25zLmNzcyJdLCJzb3VyY2VzQ29udGVudCI6WyJcbmlucHV0OmZvY3VzIHsgYmFja2dyb3VuZDogc2t5Ymx1ZTsgfVxuLm9wdGlvbl9ib3gge1xuICAgIG1hcmdpbjogMTBweDtcbiAgICBwYWRkaW5nOiA1cHg7XG4gICAgYmFja2dyb3VuZDogcGx1bTtcbiAgICBib3JkZXI6IDFweCBzb2xpZCAjZGRkO1xufVxuXG4jc2F2ZSB7XG4gICAgcG9zaXRpb246IGZpeGVkOyAgICAvKiBhYnNvbHV0ZSDjgYvjgaTjgIF3aW5kb3flhoXjgafjga7kvY3nva7jgYzlm7rlrpoqL1xuICAgIGJvdHRvbTogMTBweDsgICAgIC8qIOS4i+OBi+OCiTBweCDjgajjgYTjgYbmhI/lkbPjgIIqL1xuICAgIHJpZ2h0OiAxMDBweDtcbiAgICB3aWR0aDogMjAwcHg7XG4gICAgaGVpZ2h0OiAxMDBweDtcbiAgICBmb250LXNpemU6IDUwcHg7XG4gICAgY29sb3I6IHJlZDtcbiAgICB6LWluZGV4OjIwMDtcbn1cblxuIl0sImZpbGUiOiJvcHRpb25zLmNzcyJ9 */
