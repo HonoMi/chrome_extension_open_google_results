@@ -29,3 +29,10 @@ exports.keyUrlSpecific = function(url){
 }
 
 
+exports.createObject = function(key, value){
+    const obj = {};
+    obj[key] = value;
+    return obj;
+}
+
+

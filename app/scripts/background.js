@@ -8,19 +8,17 @@ const util = require('./util');
 const _ = require('lodash');
 
 
-// Initialize chrome.STORAGE_KEY if not.
+// Initialize chrome.STORAGE_KEY and set values onto html.
 chrome.storage.sync.get(util.OPTION_KEYS, function(items){
     for(let i=0; i<util.OPTION_KEYS.length; i++){
         const key = util.OPTION_KEYS[i];
-        if(! items.hasOwnProperty(key)){
-            continue
-        }
-        const setObj = {};
-        const defaultValue = util.OPTION_DEFAULT_VALUES[i];
-        setObj[key] = defaultValue;
+        const value = items.hasOwnProperty(key) ? items[key] : util.OPTION_DEFAULT_VALUES[i];
+        const setObj = util.createObject(key, value)
+        console.log(setObj);
         chrome.storage.sync.set(setObj);
     }
 });
+
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     if (request.method == "openLinks"){
